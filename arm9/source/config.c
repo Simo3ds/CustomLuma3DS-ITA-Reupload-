@@ -622,9 +622,9 @@ static size_t saveLumaIniConfigToStr(char *out)
     }
 
     if (VERSION_BUILD != 0) {
-        sprintf(lumaVerStr, "CustomLuma3DS v%d.%d.%d", (int)VERSION_MAJOR, (int)VERSION_MINOR, (int)VERSION_BUILD);
+        sprintf(lumaVerStr, "CustomLuma3DS-ITA v%d.%d.%d", (int)VERSION_MAJOR, (int)VERSION_MINOR, (int)VERSION_BUILD);
     } else {
-        sprintf(lumaVerStr, "CustomLuma3DS v%d.%d", (int)VERSION_MAJOR, (int)VERSION_MINOR);
+        sprintf(lumaVerStr, "CustomLuma3DS-ITA v%d.%d", (int)VERSION_MAJOR, (int)VERSION_MINOR);
     }
 
     if (ISRELEASE) {
@@ -829,80 +829,80 @@ void writeConfig(bool isConfigOptions)
         writeConfigMcu();
 
     if(updateIni && !writeLumaIniConfig())
-        error("Error writing the configuration file");
+        error("Errore durante la scrittura del fiel di config.");
 }
 
 void configMenu(bool oldPinStatus, u32 oldPinMode)
 {
-    static const char *multiOptionsText[]  = { "Default EmuNAND: 1( ) 2( ) 3( ) 4( )",
-                                               "Screen brightness: 4( ) 3( ) 2( ) 1( )",
-                                               "Splash: Off( ) Before( ) After( ) payloads",
-                                               "PIN lock: Off( ) 4( ) 6( ) 8( ) digits",
-                                               "New 3DS CPU: Off( ) Clock( ) L2( ) Clock+L2( )",
-                                               "Hbmenu autoboot: Off( ) 3DS( ) DSi( )",
-                                               "Force audio: Off( ) Headphones( ) Speakers( )"
+    static const char *multiOptionsText[]  = { "EmuNAND predefinita: 1( ) 2( ) 3( ) 4( )",
+                                               "Luminosita' schermi: 4( ) 3( ) 2( ) 1( )",
+                                               "Splash: Spento( ) Prima( ) Dopo( ) delle payloads",
+                                               "Blocco PIN: Spento( ) 4( ) 6( ) 8( ) cifre",
+                                               "New 3DS CPU: Spento( ) Clock( ) L2( ) Clock+L2( )",
+                                               "Avvio auto. hbmenu: Spento( ) 3DS( ) DSi( )",
+                                               "Forza l'audio: Spento( ) Cuffie( ) Casse( )"
                                              };
 
-    static const char *singleOptionsText[] = { "( ) Autoboot EmuNAND",
-                                               "( ) Enable loading external FIRMs and modules",
-                                               "( ) Enable game patching",
-                                               "( ) Redirect app. syscore threads to core2",
-                                               "( ) Show NAND or user string in System Settings",
-                                               "( ) Show GBA boot screen in patched AGB_FIRM",
-                                               "( ) Enable custom upscaling filters for DSi",
-                                               "( ) Allow Left+Right / Up+Down combos for DSi",
-                                               "( ) Cut 3DS Wifi in sleep mode",
-                                               "( ) Set developer UNITINFO",
-                                               "( ) Disable Arm11 exception handlers",                                               
-                                               "( ) Enable Rosalina on SAFE_FIRM",
-                                               "( ) Enable instant reboot + disable Errdisp",
-                                               "( ) Show Advanced Settings",
-                                               "( ) Enable Nand Cid and Otp hardware patching",
+    static const char *singleOptionsText[] = { "( ) Avvio auto. EmuNAND",
+                                               "( ) Abilita il caricam. di FIRMs e moduli est.",
+                                               "( ) Abilita la patch di gioco",
+                                               "( ) Reindir. il thread app. syscore al core2",
+                                               "( ) Mostra NAND o stringa utente nelle imp. di sist.",
+                                               "( ) Mostra la scher. di avvio GBA negli AGB_FIRM patchati",
+                                               "( ) Abilita il filtro upscaling personal. per sw DSi",
+                                               "( ) Accetta combinazioni Sinistra+Destra / Su+Giu' per DSi",
+                                               "( ) Interrompi il wifi 3ds in mod. riposo",
+                                               "( ) Imposta l' UNITINFO da svilup.",
+                                               "( ) Disabilita gli errori handlers Arm11",                                               
+                                               "( ) Abilita Rosalina nel SAFE_FIRM",
+                                               "( ) Abilita riav. istant. + disabilita Errdisp",
+                                               "( ) Mostra impostazioni avanzate",
+                                               "( ) Abilita patch Nand cid e otp hardware",
                                                                                               
                                                // Should always be the last 2 entries
-                                               "\nBoot chainloader",
-                                               "\nSave and exit"
+                                               "\nAvvia il chainloader",
+                                               "\nSalva ed esci"
                                              };
 
-    static const char *optionsDescription[]  = { "Select the default EmuNAND.\n\n"
-                                                 "It will be booted when no directional\n"
-                                                 "pad buttons are pressed (Up/Right/Down\n"
-                                                 "/Left equal EmuNANDs 1/2/3/4).",
+    static const char *optionsDescription[]  = { "Seleziona l'EmuNAND predefinita.\n\n"
+                                                 "Verra' avviiata quando nessun tasto dir.\n"
+                                                 "viene premuto (Su/Destra/Giu'\n"
+                                                 "/Sinistra equivalgono alle EmuNAND 1/2/3/4).",
 
-                                                 "Select the screen brightness.",
+                                                 "Seleziona la luminosita' degli schermi.",
 
-                                                 "Enable splash screen support.\n\n"
-                                                 "\t* 'Before payloads' displays it\n"
-                                                 "before booting payloads\n"
-                                                 "(intended for splashes that display\n"
-                                                 "button hints).\n\n"
-                                                 "\t* 'After payloads' displays it\n"
-                                                 "afterwards.\n\n"
-                                                 "Edit the duration in lumae.ini (3s\n"
-                                                 "default).",
+                                                 "Abilita il supporto allo schermo splash.\n\n"
+                                                 "\t* 'Prima delle payloads' lo mostra\n"
+                                                 "prima avviando le payloads\n"
+                                                 "(inteso per gli splash che indicano\n"
+                                                 "tasti da premere).\n\n"
+                                                 "\t* 'Dopo delle payloads' lo mostra\n"
+                                                 "dopo di esse.\n\n"
+                                                 "Modifica la durata in lumae.ini (3s\n"
+                                                 "predefinita).",
 
-                                                 "Activate a PIN lock.\n\n"
-                                                 "The PIN will be asked each time\n"
-                                                 "Luma3DS boots.\n\n"
-                                                 "4, 6 or 8 digits can be selected.\n\n"
-                                                 "The ABXY buttons and the directional\n"
-                                                 "pad buttons can be used as keys.\n\n"
-                                                 "A message can also be displayed\n"
-                                                 "(refer to the wiki for instructions).",
+                                                 "Attiva un blocco PIN.\n\n"
+                                                 "Il PIN viene chiesto ogni volta che\n"
+                                                 "Luma3DS si avvia.\n\n"
+                                                 "4, 6 o 8 cifre  possono venir imp.\n\n"
+                                                 "I tasti ABXY e i tasti direzionali\n"
+                                                 "possono essere usati come chiave.\n\n"
+                                                 "Un messaggio puo' anche essere mostrato\n"
+                                                 "(rif. alla wiki per info.).",
 
-                                                 "Select the New 3DS CPU mode.\n\n"
-                                                 "This won't apply to\n"
-                                                 "New 3DS exclusive/enhanced games.\n\n"
-                                                 "'Clock+L2' can cause issues with some\n"
-                                                 "games.",
+                                                 "Sel. la mod. della CPU New 3DS.\n\n"
+                                                 "Questo non si applica a\n"
+                                                 "giochi esclusivi per New 3Ds.\n\n"
+                                                 "'Clock+L2' puo' causare prob. in alcuni\n"
+                                                 "giochi.",
 
-                                                 "Enable autobooting into homebrew menu,\n"
-                                                 "either into 3DS or DSi mode.\n\n"
-                                                 "Autobooting into a gamecard title is\n"
-                                                 "not supported.\n\n"
-                                                 "Refer to the \"autoboot\" section in the\n"
-                                                 "configuration file to configure\n"
-                                                 "this feature.",
+                                                 "Abilita l'avv. auto. nel HB Menu,\n"
+                                                 "sia in mod. 3DS che DSi.\n\n"
+                                                 "L'avv. auto. in una sch. di gioco\n"
+                                                 "non e' supportato.\n\n"
+                                                 "Rif. alla sezione \"autoboot\" nel file\n"
+                                                 "di configurazione per impostare\n"
+                                                 "questa funzione.",
                                                  
                                                  "Force audio output to HPs or speakers.\n\n"
                                                  "Currently only for NATIVE_FIRM.\n\n"
