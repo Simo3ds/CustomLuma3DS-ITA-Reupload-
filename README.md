@@ -3,7 +3,6 @@
 *READ BELOW!!!!*
 # 
 
-original translation by @Simo3ds
 twl redirection to sd patch:
 https://github.com/Alexyo21/twl_firm_patcher
 
